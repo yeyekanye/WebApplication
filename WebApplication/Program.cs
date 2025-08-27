@@ -1,29 +1,38 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿using WebApplication.Data;
+using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
+var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
+
+
+// Підключаємо DbContext (SQLite)
+builder.Services.AddDbContext<CarContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Ініціалізація бази даних початковими даними
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<CarContext>();
+    DbInitializer.Initialize(context);
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
-
 app.UseAuthorization();
-
-app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Cars}/{action=Index}/{id?}");
 
 app.Run();

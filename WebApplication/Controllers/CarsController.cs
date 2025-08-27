@@ -1,38 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CarApp.Models;
-using System.Collections.Generic;
+using WebApplication.Models;
+using WebApplication.Data;
 using System.Linq;
 
 namespace CarApp.Controllers
 {
     public class CarsController : Controller
     {
-        // "База даних" у пам’яті (для прикладу)
-        private static List<Car> _cars = new List<Car>
-        {
-            new Car { Id=1, Model="BMW X5", Color="Чорний", Year=2020, BodyType="Кросовер" },
-            new Car { Id=2, Model="Audi A6", Color="Білий", Year=2019, BodyType="Седан" },
-            new Car { Id=3, Model="Toyota Corolla", Color="Сірий", Year=2021, BodyType="Седан" }
-        };
+        private readonly CarContext _context;
 
-        // Завдання 1: Відобразити список
-        public IActionResult Index()
+        public CarsController(CarContext context)
         {
-            return View(_cars);
+            _context = context;
         }
 
-        // Завдання 2: Деталі
+        // Завдання 1: список
+        public IActionResult Index()
+        {
+            return View(_context.Cars.ToList());
+        }
+
+        // Завдання 2: деталі
         public IActionResult Details(int id)
         {
-            var car = _cars.FirstOrDefault(c => c.Id == id);
+            var car = _context.Cars.FirstOrDefault(c => c.Id == id);
             if (car == null) return NotFound();
             return View(car);
         }
 
-        // Завдання 3: Видалення (GET + POST)
+        // Завдання 3: видалення
         public IActionResult Delete(int id)
         {
-            var car = _cars.FirstOrDefault(c => c.Id == id);
+            var car = _context.Cars.FirstOrDefault(c => c.Id == id);
             if (car == null) return NotFound();
             return View(car);
         }
@@ -40,8 +39,12 @@ namespace CarApp.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var car = _cars.FirstOrDefault(c => c.Id == id);
-            if (car != null) _cars.Remove(car);
+            var car = _context.Cars.FirstOrDefault(c => c.Id == id);
+            if (car != null)
+            {
+                _context.Cars.Remove(car);
+                _context.SaveChanges();
+            }
             return RedirectToAction(nameof(Index));
         }
     }

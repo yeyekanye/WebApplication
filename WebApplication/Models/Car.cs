@@ -1,11 +1,11 @@
-﻿namespace CarApp.Models
+﻿namespace WebApplication.Models
 {
     public class Car
     {
-        public int Id { get; set; }        // Унікальний ідентифікатор
-        public string Model { get; set; }  // Модель авто
-        public string Color { get; set; }  // Колір
-        public int Year { get; set; }      // Рік випуску
-        public string BodyType { get; set; } // Тип кузова
+        public int Id { get; set; }
+        public string Model { get; set; }
+        public string Color { get; set; }
+        public int Year { get; set; }
+        public string BodyType { get; set; }
     }
 }

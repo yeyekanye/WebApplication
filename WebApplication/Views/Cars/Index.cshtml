@@ -22,8 +22,10 @@
                 <td>@car.BodyType</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@car.Id">Деталі</a> |
+                    <a asp-action="Edit" asp-route-id="@car.Id">Редагувати</a> |
                     <a asp-action="Delete" asp-route-id="@car.Id">Видалити</a>
                 </td>
+
             </tr>
         }
     </tbody>

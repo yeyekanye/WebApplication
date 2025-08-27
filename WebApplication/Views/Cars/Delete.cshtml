@@ -1,0 +1,11 @@
+﻿@model CarApp.Models.Car
+
+<h2>Видалити автомобіль</h2>
+
+<p>Ви дійсно хочете видалити <b>@Model.Model</b>?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>

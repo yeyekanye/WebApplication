@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CarApp.Models.Car>
+
+<h2>Список автомобілів</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Модель</th>
+            <th>Колір</th>
+            <th>Рік</th>
+            <th>Тип кузова</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Model</td>
+                <td>@car.Color</td>
+                <td>@car.Year</td>
+                <td>@car.BodyType</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@car.Id">Деталі</a> |
+                    <a asp-action="Delete" asp-route-id="@car.Id">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

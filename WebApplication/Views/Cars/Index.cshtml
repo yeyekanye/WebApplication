@@ -1,15 +1,25 @@
 ﻿@model IEnumerable<WebApplication.Models.Car>
 
+@{
+    ViewData["Title"] = "Список автомобілів";
+}
+
 <h2>Список автомобілів</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i> Додати
+    </a>
+</p>
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Модель</th>
             <th>Колір</th>
-            <th>Рік</th>
+            <th>Рік випуску</th>
             <th>Тип кузова</th>
-            <th>Дії</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -21,11 +31,16 @@
                 <td>@car.Year</td>
                 <td>@car.BodyType</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@car.Id">Деталі</a> |
-                    <a asp-action="Edit" asp-route-id="@car.Id">Редагувати</a> |
-                    <a asp-action="Delete" asp-route-id="@car.Id">Видалити</a>
+                    <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-sm btn-info">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@car.Id" class="btn btn-sm btn-warning">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@car.Id" class="btn btn-sm btn-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
                 </td>
-
             </tr>
         }
     </tbody>

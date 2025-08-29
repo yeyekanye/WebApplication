@@ -1,8 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<WebApplication.Models.Car>
+
+@{
+    ViewData["Title"] = "Список автомобілів";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Список автомобілів</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success btn-lg rounded-circle" title="Додати">
+        <i class="bi bi-plus-circle"></i>
+    </a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Модель</th>
+            <th>Колір</th>
+            <th>Рік випуску</th>
+            <th>Тип кузова</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Model</td>
+                <td>@car.Color</td>
+                <td>@car.Year</td>
+                <td>@car.BodyType</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-sm btn-info">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@car.Id" class="btn btn-sm btn-warning">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@car.Id" class="btn btn-sm btn-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

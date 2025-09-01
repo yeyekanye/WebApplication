@@ -10,3 +10,8 @@
 </ul>
 
 <a asp-action="Index">Назад до списку</a>
+
+@if (!string.IsNullOrEmpty(Model.ImagePath))
+{
+    <img src="@Model.ImagePath" style="max-width:400px" />
+}

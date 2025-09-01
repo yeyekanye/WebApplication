@@ -7,6 +7,6 @@ namespace WebApplication.Data
     {
         public CarContext(DbContextOptions<CarContext> options) : base(options) { }
 
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Car> Cars { get; set; }  // тут достатньо одного DbSet
     }
 }

@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<WebApplication.Models.Car>
 
 @{
-    ViewData["Title"] = "Список автомобілів";
+    ViewData["Title"] = "Список авто";
 }
 
-<h2>Список автомобілів</h2>
+<h1>Список авто</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-success">
-        <i class="fa-solid fa-plus"></i> Додати
+        <i class="bi bi-plus-circle"></i> Додати авто
     </a>
 </p>
 
@@ -17,28 +17,39 @@
         <tr>
             <th>Модель</th>
             <th>Колір</th>
-            <th>Рік випуску</th>
+            <th>Рік</th>
             <th>Тип кузова</th>
+            <th>Фото</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var car in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@car.Model</td>
-                <td>@car.Color</td>
-                <td>@car.Year</td>
-                <td>@car.BodyType</td>
+                <td>@item.Model</td>
+                <td>@item.Color</td>
+                <td>@item.Year</td>
+                <td>@item.BodyType</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-sm btn-info">
-                        <i class="fa-solid fa-eye"></i>
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@Url.Content(item.ImagePath)" alt="car image" width="100" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">нема фото</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
+                        <i class="bi bi-pencil"></i>
                     </a>
-                    <a asp-action="Edit" asp-route-id="@car.Id" class="btn btn-sm btn-warning">
-                        <i class="fa-solid fa-pen"></i>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                        <i class="bi bi-eye"></i>
                     </a>
-                    <a asp-action="Delete" asp-route-id="@car.Id" class="btn btn-sm btn-danger">
-                        <i class="fa-solid fa-trash"></i>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i>
                     </a>
                 </td>
             </tr>

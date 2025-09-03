@@ -2,8 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 
-
-
 namespace WebApplication.Models
 {
     public class Car
@@ -11,25 +9,23 @@ namespace WebApplication.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Введіть модель авто")]
-        [StringLength(50)]
-        public string Model { get; set; }
+        [StringLength(50, ErrorMessage = "Модель не може перевищувати 50 символів")]
+        public string Model { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Введіть колір авто")]
-        public string Color { get; set; }
+        public string Color { get; set; } = string.Empty;
 
-        [Range(1900, 2100)]
+        [Range(1900, 2100, ErrorMessage = "Рік має бути в діапазоні 1900–2100")]
         public int Year { get; set; }
 
+        [Required(ErrorMessage = "Введіть тип кузова")]
         [Display(Name = "Тип кузова")]
-        [Required]
-        public string BodyType { get; set; }
+        public string BodyType { get; set; } = string.Empty;
 
-        [Display(Name = "Зображення")]
         [StringLength(255)]
         public string? ImagePath { get; set; }
 
         [NotMapped]
-        [Display(Name = "Завантажити картинку")]
         public IFormFile? ImageFile { get; set; }
     }
 }

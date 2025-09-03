@@ -1,38 +1,39 @@
 ﻿@model WebApplication.Models.Car
 
-<h2>Додати автомобіль</h2>
+<h2>Додати авто</h2>
 
 <form asp-action="Create" enctype="multipart/form-data">
     <div class="form-group">
-        <label>Модель</label>
+        <label asp-for="Model" class="control-label"></label>
         <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label>Колір</label>
+        <label asp-for="Color" class="control-label"></label>
         <input asp-for="Color" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label>Рік</label>
+        <label asp-for="Year" class="control-label"></label>
         <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label>Тип кузова</label>
+        <label asp-for="BodyType" class="control-label"></label>
         <input asp-for="BodyType" class="form-control" />
+        <span asp-validation-for="BodyType" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label>Картинка</label>
-        <input type="file" name="imageFile" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-success">
-        <i class="fa fa-check"></i> Зберегти
-    </button>
-    <div class="form-group">
-        <label asp-for="ImageFile"></label>
+        <label asp-for="ImageFile" class="control-label"></label>
         <input asp-for="ImageFile" type="file" class="form-control" />
         <span asp-validation-for="ImageFile" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-success">Додати</button>
+    <button type="submit" class="btn btn-success">Зберегти</button>
 </form>
 
 @section Scripts {
